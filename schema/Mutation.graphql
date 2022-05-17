@@ -1,5 +1,7 @@
 type Mutation {
   createPost(post: PostInput): Post
+  updatePost(id: String, post: PostInput): Post
+  deletePost(id: String): Post
 }
 
 input PostInput {
@@ -7,7 +9,7 @@ input PostInput {
   content: String
   coverImage: String
   author: String
-  tags: String
+  tags: [String]
   slug: String
   createdAt: Date
 }
