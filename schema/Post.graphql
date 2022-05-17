@@ -5,7 +5,7 @@ type Post {
   title: String!
   content: String!
   coverImage: String
-  author: String!
+  author: String
   tags: [String]
   slug: String
   createdAt: Date
