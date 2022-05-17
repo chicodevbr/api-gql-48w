@@ -1,0 +1,13 @@
+type Mutation {
+  createPost(post: PostInput): Post
+}
+
+input PostInput {
+  title: String
+  content: String
+  coverImage: String
+  author: String
+  tags: String
+  slug: String
+  createdAt: Date
+}

@@ -1,0 +1,12 @@
+scalar Date
+
+type Post {
+  id: ID!
+  title: String!
+  content: String!
+  coverImage: String
+  author: String!
+  tags: [String]
+  slug: String
+  createdAt: Date
+}
