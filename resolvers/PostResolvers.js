@@ -9,6 +9,9 @@ const postResolver = {
     async post(_, { id }) {
       return await Post.findById(id);
     },
+    async slug(_, { slug }) {
+      return await Post.findOne({ slug: slug });
+    },
   },
   Mutation: {
     createPost(_, { post }) {

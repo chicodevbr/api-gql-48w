@@ -3,4 +3,5 @@ type Query {
   users: [User]
   post(id: ID!): Post
   posts: [Post]
+  slug(slug: String): Post
 }
