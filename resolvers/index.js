@@ -1,5 +1,6 @@
 const Post = require('./PostResolvers');
+const Auth = require('./AuthResolver');
 
-const resolvers = [Post];
+const resolvers = [Post, Auth];
 
 module.exports = resolvers;

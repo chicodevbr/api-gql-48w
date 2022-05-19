@@ -1,3 +1,4 @@
+#import User from 'User.graphql'
 scalar Date
 
 type Post {
@@ -5,7 +6,7 @@ type Post {
   title: String!
   content: String!
   coverImage: String
-  author: String
+  author: User
   tags: [String]
   slug: String
   createdAt: Date

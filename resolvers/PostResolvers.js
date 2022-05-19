@@ -1,4 +1,4 @@
-const { Post } = require('../models');
+const { Post } = require('../db');
 const { convertToSlug } = require('../helpers/functions');
 const { UserInputError } = require('apollo-server');
 
@@ -17,11 +17,16 @@ const postResolver = {
     },
   },
   Mutation: {
-    createPost(_, { post }) {
+    createPost(_, { post }, { db: { Post }, userId }) {
+      let updatedPost;
       const slug = convertToSlug(post.title);
-      const updatePost = { ...post, slug };
+      updatedPost = { ...post, slug };
+      updatedPost = { ...updatedPost, author: userId };
 
-      const newPost = new Post(updatePost);
+      console.log(updatedPost);
+      console.log(userId);
+
+      const newPost = new Post(updatedPost);
       return newPost.save();
     },
     async updatePost(_, { id, post }) {

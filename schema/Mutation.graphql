@@ -2,14 +2,26 @@ type Mutation {
   createPost(post: PostInput): Post
   updatePost(id: String, post: PostInput): Post
   deletePost(id: String): Post
+  createUser(user: UserInput!): AuthPayload!
+  login(email: String!, password: String!): AuthPayload
 }
 
 input PostInput {
   title: String
   content: String
   coverImage: String
-  author: String
   tags: [String]
   slug: String
-  createdAt: Date
+}
+
+input UserInput {
+  name: String
+  email: String
+  password: String
+  picture: String
+}
+
+type AuthPayload {
+  token: String
+  user: User
 }
