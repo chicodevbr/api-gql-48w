@@ -1,5 +1,6 @@
 const { Post } = require('../models');
 const { convertToSlug } = require('../helpers/functions');
+const { UserInputError } = require('apollo-server');
 
 const postResolver = {
   Query: {
@@ -10,7 +11,9 @@ const postResolver = {
       return await Post.findById(id);
     },
     async slug(_, { slug }) {
-      return await Post.findOne({ slug: slug });
+      const response = await Post.findOne({ slug: slug });
+
+      return response;
     },
   },
   Mutation: {
@@ -27,9 +30,19 @@ const postResolver = {
       });
     },
     async deletePost(_, { id }) {
-      const isExist = await Post.findById(id);
+      try {
+        const isExist = await Post.findById(id);
 
-      return await Post.findByIdAndRemove(id);
+        if (!isExist) {
+          throw new UserInputError('Invalid argument value', {
+            argumentName: 'id',
+          });
+        } else {
+          return await Post.findByIdAndRemove(id);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
