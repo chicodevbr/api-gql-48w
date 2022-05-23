@@ -14,7 +14,7 @@ const authResolvers = {
       const token = jwt.sign(
         { userId: userCreated.id },
         process.env.APP_SECRET,
-        { expiresIn: '60m' }
+        { expiresIn: '5m' }
       );
 
       return {
@@ -39,7 +39,7 @@ const authResolvers = {
       }
 
       const token = jwt.sign({ userId: user.id }, process.env.APP_Secret, {
-        expiresIn: '60m',
+        expiresIn: '15m',
       });
 
       return {
