@@ -1,6 +1,9 @@
 const brcypt = require('bcryptjs/dist/bcrypt');
 const jwt = require('jsonwebtoken');
+const environment = require('../config/environment');
 require('dotenv').config();
+
+const secretKey = environment.jwtAccessTokenSecret;
 
 const authResolvers = {
   Query: {
@@ -11,11 +14,7 @@ const authResolvers = {
     createUser: async (parent, { user }, { dataSources: { users } }) => {
       const password = await brcypt.hash(user.password, 10);
       const userCreated = await users.create({ ...user, password });
-      const token = jwt.sign(
-        { userId: userCreated.id },
-        process.env.APP_SECRET,
-        { expiresIn: '5m' }
-      );
+      const token = jwt.sign({ userId: userCreated.id }, secretKey);
 
       return {
         token,
@@ -38,9 +37,7 @@ const authResolvers = {
         throw new Error('User or password is wrong. Try again.');
       }
 
-      const token = jwt.sign({ userId: user.id }, process.env.APP_Secret, {
-        expiresIn: '15m',
-      });
+      const token = jwt.sign({ _id: user._id }, secretKey);
 
       return {
         token,
