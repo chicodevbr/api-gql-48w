@@ -42,5 +42,5 @@ jobs:
           webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
           color: "#48f442"
           username: "GitHub Bot"
-          message: ${{ github.event_name }}.
+          message: ${{ github.event_name }} on {{ github.context.payload.repository.owner.name }}/{{ github.context.payload.repository.name}}.
 
