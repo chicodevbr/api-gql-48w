@@ -49,7 +49,7 @@ jobs:
             SLACK_USERNAME: ThisIsMyUsername # Optional. (defaults to webhook app)
             SLACK_CHANNEL: general # Optional. (defaults to webhook)
             SLACK_AVATAR: repository # Optional. can be (repository, sender, an URL) (defaults to webhook app avatar)
-            SLACK_CUSTOM_PAYLOAD: '{"text":"O {{ GITHUB_REPOSITORY }}  recebeu um {{ github.event_name }} de "username": "{{ GITHUB_ACTOR }}"}'
+            SLACK_CUSTOM_PAYLOAD: '{"text":"O {{ GITHUB_REPOSITORY }}  recebeu um {{ EVENT_PAYLOAD.pull_request.id  }} de "username": "{{ GITHUB_ACTOR }}"}'
         uses: Ilshidur/action-slack@2.0.2
         with:
             args: 'A new commit has been pushed.' # Optional
